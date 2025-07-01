@@ -40,3 +40,4 @@ fi
 
 
 # TODO: check exit code of scripts to see if one uniquely failed
+# TODO: add 2nd parameter to optionally choose a singular program (incase there are multiple apps that read from CLI)
