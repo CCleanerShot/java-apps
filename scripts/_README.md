@@ -1,1 +1,0 @@
-# NOTE: run script files while cd in /scripts. too lazy to make it more useable.
