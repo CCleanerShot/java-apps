@@ -14,7 +14,7 @@ public class CreditCard {
     private final String input; // must be stored as string as leading 0s are allowed https://en.wikipedia.org/wiki/Payment_card_number
     private final String inputOriginal;
 
-    protected ArrayList<String> errors = new ArrayList();
+    protected ArrayList<String> errors = new ArrayList<String>();
     protected boolean isValid = false;
     protected CreditCardProvider provider;
 
@@ -36,6 +36,10 @@ public class CreditCard {
                 .filter(Character::isDigit)
                 .mapToObj(i -> String.valueOf((char)i))
                 .collect(Collectors.joining());
+
+            if(this.input.length() != LENGTH_OF_CARD) {
+                this.errors.add("The input should have only 16 digits.");
+            } 
         }
 
         System.out.println(MessageFormat.format("{0} {1}", inputOriginal, input));
