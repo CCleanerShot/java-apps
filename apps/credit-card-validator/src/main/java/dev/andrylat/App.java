@@ -1,4 +1,4 @@
-package com.andrylat.dev;
+package dev.andrylat;
 
 import java.util.Scanner;
 

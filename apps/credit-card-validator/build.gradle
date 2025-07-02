@@ -7,7 +7,6 @@ repositories {
 }
 
 dependencies {
-    implementation libs.guava
     testImplementation libs.junit.jupiter
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
@@ -19,7 +18,7 @@ java {
 }
 
 application {
-    mainClass = 'com.andrylat.dev.App'
+    mainClass = 'dev.andrylat.App'
 }
 
 tasks.named('test') {
