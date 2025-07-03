@@ -9,7 +9,7 @@
 - Optionally, add a parameter of either `maven` or `gradle` to run with either (`test-all.sh raven`)
 
 # TODO
+- error handling for user + internal
 - parameterized tests
 - maven wrapper
 - gradle wrapper
-- error handling for user + internal

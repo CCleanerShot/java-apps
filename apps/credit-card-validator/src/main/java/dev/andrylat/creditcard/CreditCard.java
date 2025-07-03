@@ -1,6 +1,5 @@
 package dev.andrylat.creditcard;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,8 +14,8 @@ public class CreditCard {
     private final String inputOriginal;
 
     protected ArrayList<String> errors = new ArrayList();
-    protected boolean isValid = false;
-    protected CreditCardProvider provider;
+    protected boolean isValid = true;
+    protected CreditCardProvider provider = CreditCardProvider._UNKNOWN;
 
     /**
      * On creation, the input will be trimmed of whitespace, and will return -1 if the input contained any invalid characters (like letters).
@@ -24,34 +23,125 @@ public class CreditCard {
     public CreditCard(String input) {
         this.inputOriginal = input;
     
-        Pattern pattern = Pattern.compile("[^0-9\\s]");
+        Pattern pattern = Pattern.compile("[^0-9\\s]", Pattern.DOTALL);
         Matcher matcher = pattern.matcher(input);
-
-        if(matcher.matches()) {
-            System.out.println(MessageFormat.format("true {0} {1}", inputOriginal, input));
-            this.errors.add("The input should only contain digits.");
+        
+        if(matcher.find()) {
             this.input = input;
+            this.isValid = false;
+            this.errors.add("The input should only contain digits.");
         } else {
             this.input = input.codePoints()
                 .filter(Character::isDigit)
                 .mapToObj(i -> String.valueOf((char)i))
                 .collect(Collectors.joining());
 
-            if(this.input.length() != LENGTH_OF_CARD) {
+            if(!isValidLength()) {
+                this.isValid = false;
                 this.errors.add("The input should have only 16 digits.");
             } 
         }
+        
+        if(!isValidNumber()) {
+            this.isValid = false;
+            this.errors.add("The input is an invalid card number.");
+        }
 
-        System.out.println(MessageFormat.format("{0} {1}", inputOriginal, input));
+        // its possible that providers override each other
+        // but realistically, it should never happen
+        if(isProviderAmericanExpress()) {
+            this.provider = CreditCardProvider.AMERICAN_EXPRESS;
+        }
+
+        if (isProviderDinersClub())
+            this.provider = CreditCardProvider.DINERS_CLUB;
+        if(isProviderDiscover())
+            this.provider = CreditCardProvider.DISCOVER;
+        if(isProviderJCB())
+            this.provider = CreditCardProvider.JCB;
+        if(isProviderMasterCard())
+            this.provider = CreditCardProvider.MASTERCARD;
+        if(isProviderVisa())
+            this.provider = CreditCardProvider.VISA;
+
+        if(this.provider == CreditCardProvider._UNKNOWN) {
+            this.isValid = false;
+            this.errors.add("The input belongs to an unknown card provider.");
+        }
     }
+
+    public final CreditCardProvider getCardProvider() {
+        return provider;
+    }
+
 
     Integer getDigit(int position) {
-        int result = inputOriginal.charAt(position);
+        int result = Character.getNumericValue(input.charAt(position));
         return result;
     }
+    
+    final boolean isProviderAmericanExpress() {
+        int[] matches = new int[] { 34, 37 };
+        int number = (getDigit(0) * 10) + getDigit(1);
+        
+        for (int match : matches)
+            if (match == number)
+                return true;
 
-    public boolean isValidInput() {
-        return inputOriginal.length() == LENGTH_OF_CARD;
+        return false;
+    }
+
+    final boolean isProviderDinersClub() {
+        int[] matches = new int[] { 36, 38 };
+        int number = (getDigit(0) * 10) + getDigit(1);
+        
+        for (int match : matches)
+            if (match == number)
+                return true;
+
+        return false;
+    }
+
+    final boolean isProviderDiscover() {
+        int[] matches = new int[] { 6011, 65 };
+        int number1 = (getDigit(0) * 10) + getDigit(1);
+        int number2 = (getDigit(0) * 1000) + (getDigit(1) * 100) + (getDigit(2) * 10) + (getDigit(3));
+
+        for (int match : matches)
+            if (match == number1 || match == number2)
+                return true;
+
+        return false;
+    }
+
+    final boolean isProviderJCB() {
+        int[] matches = new int[] { 35 };
+        int number = (getDigit(0) * 10) + getDigit(1);
+
+        for (int match : matches)
+            if (match == number)
+                return true;
+
+        return false;
+    }
+
+    final boolean isProviderMasterCard() {
+        int[] matches = new int[] { 51, 52, 53, 54, 55 };
+        int number = (getDigit(0) * 10) + getDigit(1);
+        
+        for (int match : matches)
+            if (match == number)
+                return true;
+
+        return false;
+    }
+
+    final boolean isProviderVisa() {
+        return getDigit(0) == 4;
+    }
+
+    public final boolean isValidLength() {
+        return input.length() == LENGTH_OF_CARD;
     }
 
     /**
@@ -59,14 +149,13 @@ public class CreditCard {
      * @param card
      * @return boolean
      */
-    public boolean isValidNumber() {
+    public final boolean isValidNumber() {
         int sum = 0;
 
-        String string = inputOriginal;
         // even digits, multiple by 2, add result of digits if 2 digit, and return result
         // odd digits, return result
         // ignore last number as it is the checkDigit
-        for (int i = 0; i < string.length() - 1; i++) {
+        for (int i = 0; i < input.length() - 1; i++) {
             Integer number = getDigit(i);
 
             if(i % 2 == 0) {
@@ -83,22 +172,6 @@ public class CreditCard {
         
         // check digit is the value needed to make the result a multiple of 10
         int checkDigit = 10 - (sum % 10);
-        return checkDigit == getDigit(inputOriginal.length() - 1);
-    }
-    
-    /**
-     * Check if this card currently belongs to the provider it's associated with.
-     * @return boolean
-     */
-    public boolean validCardProvider() {
-        return false;
-    }
-
-    public boolean validate() {
-        boolean ValidInput = isValidInput();
-        boolean ValidProvider = validCardProvider();
-        boolean ValidNumber = isValidNumber();
-        isValid = ValidInput && ValidProvider && ValidNumber;
-        return isValid;
+        return checkDigit == getDigit(input.length() - 1);
     }
 }
