@@ -12,5 +12,4 @@
 - parameterized tests
 - maven wrapper
 - gradle wrapper
-- naming conventions
 - error handling for user + internal
