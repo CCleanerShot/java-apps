@@ -14,7 +14,7 @@ public class CreditCard {
     private final String input; // must be stored as string as leading 0s are allowed https://en.wikipedia.org/wiki/Payment_card_number
     private final String inputOriginal;
 
-    protected ArrayList<String> errors = new ArrayList<String>();
+    protected ArrayList<String> errors = new ArrayList();
     protected boolean isValid = false;
     protected CreditCardProvider provider;
 
@@ -50,8 +50,8 @@ public class CreditCard {
         return result;
     }
 
-    public static boolean isValidInput(CreditCard card) {
-        return card.inputOriginal.length() == LENGTH_OF_CARD;
+    public boolean isValidInput() {
+        return inputOriginal.length() == LENGTH_OF_CARD;
     }
 
     /**
@@ -59,15 +59,15 @@ public class CreditCard {
      * @param card
      * @return boolean
      */
-    public static boolean isValidNumber(CreditCard card) {
+    public boolean isValidNumber() {
         int sum = 0;
 
-        String string = card.inputOriginal;
+        String string = inputOriginal;
         // even digits, multiple by 2, add result of digits if 2 digit, and return result
         // odd digits, return result
         // ignore last number as it is the checkDigit
         for (int i = 0; i < string.length() - 1; i++) {
-            Integer number = card.getDigit(i);
+            Integer number = getDigit(i);
 
             if(i % 2 == 0) {
                 number = number * 2;
@@ -83,7 +83,7 @@ public class CreditCard {
         
         // check digit is the value needed to make the result a multiple of 10
         int checkDigit = 10 - (sum % 10);
-        return checkDigit == card.getDigit(card.inputOriginal.length() - 1);
+        return checkDigit == getDigit(inputOriginal.length() - 1);
     }
     
     /**
@@ -95,9 +95,9 @@ public class CreditCard {
     }
 
     public boolean validate() {
-        boolean ValidInput = CreditCard.isValidInput(this);
+        boolean ValidInput = isValidInput();
         boolean ValidProvider = validCardProvider();
-        boolean ValidNumber = CreditCard.isValidNumber(this);
+        boolean ValidNumber = isValidNumber();
         isValid = ValidInput && ValidProvider && ValidNumber;
         return isValid;
     }

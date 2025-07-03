@@ -21,12 +21,12 @@ public class CreditCardTest {
         
         for (String input : validInputs) {
             CreditCard card = new CreditCard(input);
-            assertEquals(true, CreditCard.isValidInput(card));
+            assertEquals(true, card.isValidInput());
         }
 
         for (String input : invalidInputs) {
             CreditCard card = new CreditCard(input);
-            assertEquals(false, CreditCard.isValidInput(card));
+            assertEquals(false, card.isValidInput());
         }
     }
 
@@ -133,12 +133,12 @@ public class CreditCardTest {
         
         for (String input : validInputs) {
             CreditCard card = new CreditCard(input);
-            assertEquals(true, CreditCard.isValidNumber(card));
+            assertEquals(true, card.isValidNumber());
         }
 
         for (String input : invalidInputs) {
             CreditCard card = new CreditCard(input);
-            assertEquals(false, CreditCard.isValidNumber(card));
+            assertEquals(false, card.isValidNumber());
         }
     }
 }

@@ -13,5 +13,4 @@
 - maven wrapper
 - gradle wrapper
 - naming conventions
-- remove static unless good reason
 - error handling for user + internal
