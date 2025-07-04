@@ -35,35 +35,37 @@ public class CreditCard {
                 .filter(Character::isDigit)
                 .mapToObj(i -> String.valueOf((char)i))
                 .collect(Collectors.joining());
-
-            if(!isValidLength()) {
-                this.isValid = false;
-                this.errors.add("The input should have only 16 digits.");
-            } 
         }
         
+        if(!isValidLength()) {
+            this.isValid = false;
+            this.errors.add("The input should have exactly 16 digits.");
+        }
+
         if(!isValidNumber()) {
             this.isValid = false;
             this.errors.add("The input is an invalid card number.");
+        } else {
+            // its possible that providers override each other
+            // but realistically, it should never happen
+            if(isProviderAmericanExpress())
+                this.provider = CreditCardProvider.AMERICAN_EXPRESS;
+            if (isProviderDinersClub())
+                this.provider = CreditCardProvider.DINERS_CLUB;
+            if(isProviderDiscover())
+                this.provider = CreditCardProvider.DISCOVER;
+            if(isProviderJCB())
+                this.provider = CreditCardProvider.JCB;
+            if(isProviderMasterCard())
+                this.provider = CreditCardProvider.MASTERCARD;
+            if(isProviderVisa())
+                this.provider = CreditCardProvider.VISA;
         }
 
-        // its possible that providers override each other
-        // but realistically, it should never happen
-        if(isProviderAmericanExpress()) {
-            this.provider = CreditCardProvider.AMERICAN_EXPRESS;
-        }
-
-        if (isProviderDinersClub())
-            this.provider = CreditCardProvider.DINERS_CLUB;
-        if(isProviderDiscover())
-            this.provider = CreditCardProvider.DISCOVER;
-        if(isProviderJCB())
-            this.provider = CreditCardProvider.JCB;
-        if(isProviderMasterCard())
-            this.provider = CreditCardProvider.MASTERCARD;
-        if(isProviderVisa())
-            this.provider = CreditCardProvider.VISA;
-
+        // considered checking all for min length first, and letting providers being easy
+        // to set but considering the real parameters, card providers need 16 digits, so
+        // even if the first numbers match, if the lengths don't then this should emit
+        // errors anyways, preventing someone from guessing a private provider
         if(this.provider == CreditCardProvider._UNKNOWN) {
             this.isValid = false;
             this.errors.add("The input belongs to an unknown card provider.");
@@ -74,10 +76,13 @@ public class CreditCard {
         return provider;
     }
 
-
     Integer getDigit(int position) {
         int result = Character.getNumericValue(input.charAt(position));
         return result;
+    }
+
+    public ArrayList<String> getErrors() {
+        return errors;
     }
     
     final boolean isProviderAmericanExpress() {
