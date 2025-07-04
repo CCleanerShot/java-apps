@@ -27,7 +27,7 @@ if [ $RAN -eq 1 ]; then
 fi
 
 
-# run tests-only instead
+# run tests only instead
 echo -e $RED"------TESTING WITH MAVEN------"$WHITE
 ./credit-card-validator-maven-test.sh
 echo -e $YELLOW"------TESTING WITH GRADLE------"$WHITE

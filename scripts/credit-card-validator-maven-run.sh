@@ -2,7 +2,6 @@
 
 # script file to run the maven build
 
-./credit-card-validator-maven-test.sh
 cd ..
 mvn clean
 mvn package
