@@ -45,22 +45,20 @@ public class CreditCard {
         if(!isValidNumber()) {
             this.isValid = false;
             this.errors.add("The input is an invalid card number.");
-        } else {
-            // its possible that providers override each other
-            // but realistically, it should never happen
-            if(isProviderAmericanExpress())
-                this.provider = CreditCardProvider.AMERICAN_EXPRESS;
-            if (isProviderDinersClub())
-                this.provider = CreditCardProvider.DINERS_CLUB;
-            if(isProviderDiscover())
-                this.provider = CreditCardProvider.DISCOVER;
-            if(isProviderJCB())
-                this.provider = CreditCardProvider.JCB;
-            if(isProviderMasterCard())
-                this.provider = CreditCardProvider.MASTERCARD;
-            if(isProviderVisa())
-                this.provider = CreditCardProvider.VISA;
         }
+
+        if(isProviderAmericanExpress())
+            this.provider = CreditCardProvider.AMERICAN_EXPRESS;
+        else if (isProviderDinersClub())
+            this.provider = CreditCardProvider.DINERS_CLUB;
+        else if(isProviderDiscover())
+            this.provider = CreditCardProvider.DISCOVER;
+        else if(isProviderJCB())
+            this.provider = CreditCardProvider.JCB;
+        else if(isProviderMasterCard())
+            this.provider = CreditCardProvider.MASTERCARD;
+        else if(isProviderVisa())
+            this.provider = CreditCardProvider.VISA;
 
         // considered checking all for min length first, and letting providers being easy
         // to set but considering the real parameters, card providers need 16 digits, so
