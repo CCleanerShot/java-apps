@@ -49,7 +49,7 @@ public class CreditCard {
 
         if(isProviderAmericanExpress())
             this.provider = CreditCardProvider.AMERICAN_EXPRESS;
-        else if (isProviderDinersClub())
+        else if(isProviderDinersClub())
             this.provider = CreditCardProvider.DINERS_CLUB;
         else if(isProviderDiscover())
             this.provider = CreditCardProvider.DISCOVER;

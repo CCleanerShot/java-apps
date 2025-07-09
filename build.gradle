@@ -1,5 +1,6 @@
 def javaProjects = [
-    project(":apps:credit-card-validator")
+    project(":apps:credit-card-validator"),
+    project(":apps:dream-shops")
 ]
 
 configure(javaProjects) {

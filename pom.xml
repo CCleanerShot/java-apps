@@ -10,6 +10,7 @@
 
     <modules>
         <module>apps/credit-card-validator</module>
+        <module>apps/dream-shops</module>
     </modules>
 
     <packaging>pom</packaging>
