@@ -6,10 +6,8 @@ import java.util.Scanner;
 
 import dev.andrylat.creditcard.CreditCard;
 
-public class App 
-{
-    public static void main(String[] args)
-    {
+public class App {
+    public static void main(String[] args) {
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) { 
                 System.out.println("> Welcome to the Credit Card Validator! Please enter your 16 digit card number (type 'exit' to leave):");
