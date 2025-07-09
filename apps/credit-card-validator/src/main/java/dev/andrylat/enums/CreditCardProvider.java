@@ -1,7 +1,7 @@
 package dev.andrylat.enums;
 
 public enum CreditCardProvider {
-    _UNKNOWN,
+    UNKNOWN,
     AMERICAN_EXPRESS,
     DINERS_CLUB,
     DISCOVER,

@@ -15,7 +15,7 @@ public class CreditCard {
 
     protected ArrayList<String> errors = new ArrayList();
     protected boolean isValid = true;
-    protected CreditCardProvider provider = CreditCardProvider._UNKNOWN;
+    protected CreditCardProvider provider = CreditCardProvider.UNKNOWN;
 
     /**
      * On creation, the input will be trimmed of whitespace, and will return -1 if the input contained any invalid characters (like letters).
@@ -64,7 +64,7 @@ public class CreditCard {
         // to set but considering the real parameters, card providers need 16 digits, so
         // even if the first numbers match, if the lengths don't then this should emit
         // errors anyways, preventing someone from guessing a private provider
-        if(this.provider == CreditCardProvider._UNKNOWN) {
+        if(this.provider == CreditCardProvider.UNKNOWN) {
             this.isValid = false;
             this.errors.add("The input belongs to an unknown card provider.");
         }
