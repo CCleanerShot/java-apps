@@ -1,6 +1,7 @@
 package dev.andrylat.ccleanershot.creditcard_validator.creditcard;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -13,7 +14,7 @@ public class CreditCard {
     private final String input; // must be stored as string as leading 0s are allowed https://en.wikipedia.org/wiki/Payment_card_number
     private final String inputOriginal;
 
-    protected ArrayList<String> errors = new ArrayList();
+    protected List<String> errors = new ArrayList();
     protected boolean isValid = true;
     protected CreditCardProvider provider = CreditCardProvider.UNKNOWN;
 
@@ -79,7 +80,7 @@ public class CreditCard {
         return result;
     }
 
-    public ArrayList<String> getErrors() {
+    public List<String> getErrors() {
         return errors;
     }
     

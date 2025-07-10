@@ -1,7 +1,7 @@
 package dev.andrylat.ccleanershot.creditcard_validator;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import dev.andrylat.ccleanershot.creditcard_validator.creditcard.CreditCard;
@@ -18,7 +18,7 @@ public class App {
                 }
 
                 CreditCard card = new CreditCard(input);
-                ArrayList<String> errors = card.getErrors();
+                List<String> errors = card.getErrors();
 
                 if(!errors.isEmpty()) {
                     System.out.println("> ERRORS:");
