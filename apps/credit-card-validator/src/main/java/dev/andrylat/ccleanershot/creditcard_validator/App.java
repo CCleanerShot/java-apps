@@ -14,7 +14,7 @@ public class App {
                 String input = scanner.nextLine();
 
                 if(input.equals("exit")) {
-                    System.exit(0);
+                    break;
                 }
 
                 CreditCard card = new CreditCard(input);
