@@ -1,11 +1,11 @@
-package dev.andrylat.creditcard;
+package dev.andrylat.ccleanershot.creditcard_validator.creditcard;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import dev.andrylat.enums.CreditCardProvider;
+import dev.andrylat.ccleanershot.creditcard_validator.enums.CreditCardProvider;
 
 public class CreditCard {
     private static final int LENGTH_OF_CARD = 16;

@@ -1,12 +1,12 @@
-package dev.andrylat;
+package dev.andrylat.ccleanershot.creditcard_validator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import dev.andrylat.creditcard.CreditCard;
-import dev.andrylat.enums.CreditCardProvider;
+import dev.andrylat.ccleanershot.creditcard_validator.creditcard.CreditCard;
+import dev.andrylat.ccleanershot.creditcard_validator.enums.CreditCardProvider;
 
 
 public class CreditCardTest {

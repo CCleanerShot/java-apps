@@ -1,10 +1,10 @@
-package dev.andrylat;
+package dev.andrylat.ccleanershot.creditcard_validator;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import dev.andrylat.creditcard.CreditCard;
+import dev.andrylat.ccleanershot.creditcard_validator.creditcard.CreditCard;
 
 public class App {
     public static void main(String[] args) {

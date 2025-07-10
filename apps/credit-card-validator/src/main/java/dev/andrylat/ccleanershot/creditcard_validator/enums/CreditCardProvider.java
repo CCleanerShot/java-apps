@@ -1,4 +1,4 @@
-package dev.andrylat.enums;
+package dev.andrylat.ccleanershot.creditcard_validator.enums;
 
 public enum CreditCardProvider {
     UNKNOWN,
