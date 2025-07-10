@@ -87,9 +87,11 @@ public class CreditCard {
         int[] matches = new int[] { 34, 37 };
         int number = (getDigit(0) * 10) + getDigit(1);
         
-        for (int match : matches)
-            if (match == number)
+        for (int match : matches) {
+            if (match == number) {
                 return true;
+            }
+        }
 
         return false;
     }
@@ -98,9 +100,11 @@ public class CreditCard {
         int[] matches = new int[] { 36, 38 };
         int number = (getDigit(0) * 10) + getDigit(1);
         
-        for (int match : matches)
-            if (match == number)
+        for (int match : matches) {
+            if (match == number) {
                 return true;
+            }
+        }
 
         return false;
     }
@@ -110,9 +114,11 @@ public class CreditCard {
         int number1 = (getDigit(0) * 10) + getDigit(1);
         int number2 = (getDigit(0) * 1000) + (getDigit(1) * 100) + (getDigit(2) * 10) + (getDigit(3));
 
-        for (int match : matches)
-            if (match == number1 || match == number2)
+        for (int match : matches) {
+            if (match == number1 || match == number2) {
                 return true;
+            }
+        }
 
         return false;
     }
@@ -121,9 +127,11 @@ public class CreditCard {
         int[] matches = new int[] { 35 };
         int number = (getDigit(0) * 10) + getDigit(1);
 
-        for (int match : matches)
-            if (match == number)
+        for (int match : matches) {
+            if (match == number) {
                 return true;
+            }
+        }
 
         return false;
     }
@@ -132,9 +140,11 @@ public class CreditCard {
         int[] matches = new int[] { 51, 52, 53, 54, 55 };
         int number = (getDigit(0) * 10) + getDigit(1);
         
-        for (int match : matches)
-            if (match == number)
+        for (int match : matches) {
+            if (match == number) {
                 return true;
+            }
+        }
 
         return false;
     }

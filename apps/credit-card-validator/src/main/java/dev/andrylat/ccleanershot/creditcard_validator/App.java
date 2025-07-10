@@ -23,8 +23,9 @@ public class App {
                 if(!errors.isEmpty()) {
                     System.out.println("> ERRORS:");
 
-                    for (String error : errors)
+                    for (String error : errors) {
                         System.out.println(MessageFormat.format("  - {0}", error));
+                    }
                 } else {
                     System.out.println(MessageFormat.format("> The card is valid. Card Provider: {0}", card.getCardProvider()));
                 }
