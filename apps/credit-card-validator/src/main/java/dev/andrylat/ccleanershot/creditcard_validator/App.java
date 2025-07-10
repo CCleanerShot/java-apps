@@ -31,8 +31,8 @@ public class App {
                 }
         }
 
-        } catch (Exception err) {
-            System.err.println(MessageFormat.format("Unhandled exception: {0}", err));
+        } catch (Exception ex) {
+            System.err.println(MessageFormat.format("Unhandled exception: {0}", ex));
         }
     }
 }
